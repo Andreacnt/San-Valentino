@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Per Te ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Schermata iniziale per attivare musica e animazione -->
+<div id="overlay">
+    <button id="start-btn">Clicca per iniziare ❤️</button>
+</div>
+
+<audio id="bg-music" src="canzone.mp3"></audio>
+
+<div class="scene" id="scene">
+  <!-- TESTO A SINISTRA -->
+  <section class="card" id="love-card">
+    <p class="title">Per l'amore della mia vita:</p>
+    <p class="quote">Se potessi scegliere un posto sicuro, sarebbe al tuo fianco.</p>
+    <p class="caption">Il nostro amore è iniziato da...</p>
+    <div class="timer">
+      <div><span id="days">0</span><p>giorni</p></div>
+      <div><span id="hours">0</span><p>ore</p></div>
+      <div><span id="minutes">0</span><p>minuti</p></div>
+      <div><span id="seconds">0</span><p>secondi</p></div>
+    </div>
+    <p class="footer">Buon San Valentino ❤️ 14.02.2026</p>
+  </section>
+
+  <!-- ALBERO A DESTRA -->
+  <div class="tree-area">
+    <canvas id="treeCanvas"></canvas>
+    <div id="seed-heart">❤️</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
