@@ -1,86 +1,97 @@
-:root{
-  --bg:#F5E8DC;
-  --text:#5C4033;
-  --accent:#c9184a;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body{
-  margin:0;
-  background:#0b0b0b;
-  font-family: 'Segoe UI', sans-serif;
-  overflow:hidden;
-}
-
-/* Overlay iniziale */
 #overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #0b0b0b;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    transition: opacity 1s;
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000; transition: opacity 1s;
 }
 
 #start-btn {
-    padding: 20px 40px;
-    font-size: 20px;
-    background: var(--bg);
-    color: var(--text);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 0 20px rgba(245, 232, 220, 0.3);
+  font-size: 2rem; padding: 1.5rem 4rem;
+  background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
+  color: white; border: none; border-radius: 50px;
+  cursor: pointer; font-weight: 600;
+  box-shadow: 0 10px 40px rgba(255, 77, 109, 0.4);
 }
 
-.scene{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:100vh;
-  padding:0 6vw;
-  gap:4vw;
-  opacity: 0; /* Nascosta all'inizio */
+#scene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  gap: 50px;
+  opacity: 0;
   transition: opacity 1s;
 }
 
-.scene.active { opacity: 1; }
+#scene.active { opacity: 1; }
 
-/* TESTO */
-.card{
-  background:var(--bg);
-  color:var(--text);
-  padding:40px;
-  border-radius:30px;
-  width:420px;
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
-  opacity:0;
-  transform:translateX(-40px);
-  transition:1.5s ease;
+#tree-wrapper {
+  position: relative;
+  width: 500px; /* Dimensione fissa per il contenitore */
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-.scene.show-text .card{ opacity:1; transform:translateX(0); }
-
-.title{ font-size:18px; }
-.quote{ font-size:28px; font-weight:800; margin:20px 0 30px; }
-.timer{ display:flex; gap:20px; border-top:2px solid var(--text); padding-top:15px; margin-top:10px; }
-.timer span{ font-size:26px; font-weight:800; }
-.timer p{ font-size:12px; margin:0; text-transform:uppercase; }
-.footer{ margin-top:30px; color:var(--accent); font-weight:700; }
-
-/* ALBERO */
-.tree-area{ position:relative; transform:scale(1.4); transition:1.5s ease; }
-.scene.show-text .tree-area{ transform:scale(1); }
-canvas{ width:420px; height:520px; }
-#seed-heart{ position:absolute; top:-80px; left:50%; transform:translateX(-50%); font-size:32px; opacity: 0; }
-
-.fall{ animation:fall 2s forwards ease-in; opacity: 1 !important; }
-@keyframes fall{ to{ top:380px; opacity:0; } }
-
-@media (max-width: 800px) {
-    .scene { flex-direction: column-reverse; justify-content: center; padding: 20px; }
-    .card { width: 90%; padding: 20px; }
-    .tree-area { transform: scale(0.8); }
+#treeCanvas {
+  width: 100%;
+  height: auto;
+  z-index: 5;
 }
+
+#seed-heart {
+  position: absolute;
+  font-size: 3.5rem;
+  color: #ff4d6d;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  bottom: 550px; /* Parte dall'alto del wrapper */
+}
+
+.love-card {
+  background: rgba(255, 255, 255, 0.9) !important; /* Forza lo sfondo beige/bianco */
+  padding: 40px !important;
+  border-radius: 30px !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;
+  backdrop-filter: blur(10px);
+  max-width: 450px;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 1.5s ease;
+  color: #2d3436 !important;
+}
+
+#scene.show-text .love-card {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.love-card h1 { font-size: 3rem; color: #d63031; margin-bottom: 15px; }
+.love-card p { font-size: 1.3rem; margin-bottom: 25px; line-height: 1.5; color: #2d3436; }
+
+.timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.time-box {
+  background: white;
+  padding: 15px 5px;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.time-box span { display: block; font-size: 2rem; font-weight: 700; color: #ff4d6d; }
+.time-box small { font-size: 0.75rem; color: #636e72; text-transform: uppercase; }
