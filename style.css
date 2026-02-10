@@ -1,97 +1,149 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Per Te ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; transition: opacity 1s;
+        }
+        #start-btn {
+            font-size: 2rem; padding: 1.5rem 4rem;
+            background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
+            color: white; border: none; border-radius: 50px;
+            cursor: pointer; font-weight: 600;
+            box-shadow: 0 10px 40px rgba(255, 77, 109, 0.4);
+            transition: transform 0.3s;
+        }
+        #start-btn:hover { transform: scale(1.05); }
+        #scene {
+            display: flex; align-items: center; justify-content: center;
+            width: 100vw; height: 100vh; gap: 40px;
+            opacity: 0; transition: opacity 1s;
+        }
+        #scene.active { opacity: 1; }
+        #tree-wrapper {
+            position: relative; width: 550px; height: 650px;
+            display: flex; justify-content: center; align-items: flex-end;
+        }
+        #treeCanvas { width: 100%; height: auto; z-index: 5; }
+        
+        #seed-heart {
+            position: absolute; font-size: 1.8rem; color: #ff4d6d;
+            opacity: 0; left: 50%; transform: translateX(-50%);
+            z-index: 10; bottom: 600px;
+            filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.5));
+        }
 
-body {
-  font-family: 'Cormorant Garamond', serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  overflow: hidden;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        /* BOX TESTO BEIGE */
+        .final-card {
+            background: rgba(245, 240, 225, 0.95) !important;
+            padding: 45px !important;
+            border-radius: 35px !important;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35) !important;
+            backdrop-filter: blur(12px);
+            max-width: 480px;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1.5s ease;
+            color: #2d3436 !important;
+            z-index: 20;
+            border: 1px solid rgba(212, 189, 151, 0.3);
+        }
+        #scene.show-text .final-card { opacity: 1; transform: translateX(0); }
+        
+        /* TITOLO CON FONT CALLIGRAFICO */
+        .final-card h1 { 
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            color: #d63031;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        /* PARAGRAFO CON FONT LEGGIBILE */
+        .final-card p { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: #2d3436;
+        }
+        
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .t-box {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 18px 5px; border-radius: 18px;
+            text-align: center; border: 1px solid rgba(0,0,0,0.03);
+        }
+        .t-box span { display: block; font-size: 1.9rem; font-weight: 700; color: #ff4d6d; }
+        .t-box small { font-size: 0.75rem; color: #636e72; text-transform: uppercase; }
+        
+        .footer-date { 
+            margin-top: 25px;
+            font-weight: 600;
+            color: #d63031;
+            font-size: 1.15rem;
+            text-align: center;
+        }
+        
+        /* DEDICA COME FIRMA CALLIGRAFICA */
+        .dedica { 
+            margin-top: 15px;
+            font-family: 'Great Vibes', cursive;
+            font-style: normal;
+            font-size: 2.2rem;
+            color: #2d3436;
+            text-align: center;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
 
-#overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 1000; transition: opacity 1s;
-}
+    <div id="overlay">
+        <button id="start-btn">Apri il mio cuore ❤️</button>
+    </div>
 
-#start-btn {
-  font-size: 2rem; padding: 1.5rem 4rem;
-  background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
-  color: white; border: none; border-radius: 50px;
-  cursor: pointer; font-weight: 600;
-  box-shadow: 0 10px 40px rgba(255, 77, 109, 0.4);
-}
+    <div id="scene">
+        <div class="final-card">
+            <h1>Per l'amore della mia vita:</h1>
+            <p>Se potessi scegliere un posto sicuro, sarebbe al tuo fianco. Il nostro amore è iniziato da...</p>
+            
+            <div class="timer-grid">
+                <div class="t-box"><span id="days">0</span><small>giorni</small></div>
+                <div class="t-box"><span id="hours">0</span><small>ore</small></div>
+                <div class="t-box"><span id="minutes">0</span><small>minuti</small></div>
+                <div class="t-box"><span id="seconds">0</span><small>secondi</small></div>
+            </div>
 
-#scene {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1200px;
-  gap: 50px;
-  opacity: 0;
-  transition: opacity 1s;
-}
+            <div class="footer-date">Buon San Valentino ❤️ 14.02.2026</div>
+            <div class="dedica">Tuo, IronMan</div>
+        </div>
 
-#scene.active { opacity: 1; }
+        <div id="tree-wrapper">
+            <div id="seed-heart">❤️</div>
+            <canvas id="treeCanvas"></canvas>
+        </div>
+    </div>
 
-#tree-wrapper {
-  position: relative;
-  width: 500px; /* Dimensione fissa per il contenitore */
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
+    <audio id="bg-music" src="canzone.mp3" loop></audio>
 
-#treeCanvas {
-  width: 100%;
-  height: auto;
-  z-index: 5;
-}
-
-#seed-heart {
-  position: absolute;
-  font-size: 3.5rem;
-  color: #ff4d6d;
-  opacity: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  bottom: 550px; /* Parte dall'alto del wrapper */
-}
-
-.love-card {
-  background: rgba(255, 255, 255, 0.9) !important; /* Forza lo sfondo beige/bianco */
-  padding: 40px !important;
-  border-radius: 30px !important;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;
-  backdrop-filter: blur(10px);
-  max-width: 450px;
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 1.5s ease;
-  color: #2d3436 !important;
-}
-
-#scene.show-text .love-card {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.love-card h1 { font-size: 3rem; color: #d63031; margin-bottom: 15px; }
-.love-card p { font-size: 1.3rem; margin-bottom: 25px; line-height: 1.5; color: #2d3436; }
-
-.timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.time-box {
-  background: white;
-  padding: 15px 5px;
-  border-radius: 15px;
-  text-align: center;
-  border: 1px solid rgba(0,0,0,0.05);
-}
-.time-box span { display: block; font-size: 2rem; font-weight: 700; color: #ff4d6d; }
-.time-box small { font-size: 0.75rem; color: #636e72; text-transform: uppercase; }
+    <script src="script.js"></script>
+</body>
+</html>
