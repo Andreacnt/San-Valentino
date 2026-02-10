@@ -9,7 +9,7 @@ canvas.width = 900;
 canvas.height = 1100;
 ctx.scale(2.2, 2.2);
 
-const startDate = new Date(2025, 7, 1);
+const startDate = new Date(2025, 6, 1);
 function updateTimer() {
   const d = Math.abs(new Date() - startDate) / 1000;
   document.getElementById("days").textContent = Math.floor(d / 86400);
